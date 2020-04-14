@@ -24,10 +24,12 @@ const parseArgs = (args) => {
 }
 
 const { 
-  name = 'genrcBlank',
+  name = '',
   path = '',
   s: styles = false
 } = parseArgs(process.argv);
+
+if(!name) throw new Error('grc: missed flag --name')
 
 const pathWithoutLastSlash = path.replace(/\/$/g, '');
 const pathWithName = path ? `${pathWithoutLastSlash}/${name}` : `${name}`;
@@ -61,9 +63,7 @@ type Props = OwnProps;
 
 const ${name}: FC<Props> = (props) => {
   ${styles ? 'const styles = useStyles();' : ''}
-  return (
-    <div>${name}</div>
-  );
+  return <div className=${styles ? 'styles.root' : name}>${name}</div>;
 };
 
 export default ${name};
@@ -72,7 +72,7 @@ export default ${name};
 const stylesBlank = `
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles(() => ({
   root: {},
 }));
 `
