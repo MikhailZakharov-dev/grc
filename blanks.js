@@ -13,9 +13,9 @@ const ${name}: FC<Props> = () => {
 export default ${name};
 `
 
-const typesBlank = () => `type OwnProps = {};
+const typesBlank = () => `interface IComponentOwnProps {};
 
-export type Props = OwnProps;
+export interface IComponentProps extends IComponentOwnProps {};
 `
 
 const stylesBlank = () => `import styled from 'styled-components/macro';

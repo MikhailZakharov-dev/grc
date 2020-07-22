@@ -37,7 +37,7 @@ const createFile = (filePath, fileName, content) =>
   })
 
   
-module.exports = {
+module.exports = {s
   parseArgs,
   createFile,
   createDir
