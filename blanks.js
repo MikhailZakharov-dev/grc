@@ -1,27 +1,32 @@
+const propsName = (name) => `I${name}Props`; 
+
 const indexBlank = (name) => `export { default } from './${name}';
 `;
 
+
 const componentBlank = (name, withStyles) => `import React, { FC } from 'react';
-import { Props } from './types';
 
-${withStyles ? `import { Wrapper } from './styles';` : ''}
+${withStyles ? `import { Styled${name} } from './styled';` : ''}
+import { ${propsName(name)} } from './types';
 
-const ${name}: FC<Props> = () => {
-  return ${withStyles ? `<Wrapper>${name}</Wrapper>;` : `<div>${name}</div>;`}
+const ${name}: FC<${propsName(name)}> = () => {
+  return ${withStyles ? `<Styled${name}>${name}</Styled${name}>;` : `<div>${name}</div>;`}
 };
 
 export default ${name};
 `
 
-const typesBlank = () => `interface IComponentOwnProps {};
-
-export interface IComponentProps extends IComponentOwnProps {};
+const typesBlank = (name) => `export interface ${propsName(name)} {
+  className?: string;
+  onClick?: () => void;
+}
 `
 
-const stylesBlank = () => `import styled from 'styled-components/macro';
-import { Props } from './types';
+const stylesBlank = (name) => `import styled from 'styled-components/macro';
 
-export const Wrapper = styled.div<Props>\`\`;
+// import { ${propsName(name)} } from './types';
+
+export const Styled${name} = styled.div\`\`;
 `
 
 const testBlank = (name) => `import React from 'react';

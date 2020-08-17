@@ -42,16 +42,16 @@ const tasks = new Listr([
         },
         {
           title: 'types.ts',
-          task: () => createFileInDir('types.ts', typesBlank())
+          task: () => createFileInDir('types.ts', typesBlank(name))
         },
         {
           title: `${name}.tsx`,
           task: () => createFileInDir(`${name}.tsx`, componentBlank(name, withStyles))
         },
         {
-          title: 'styles.ts',
+          title: 'styled.ts',
           skip: () => !withStyles,
-          task: () => createFileInDir('styles.ts', stylesBlank())
+          task: () => createFileInDir('styled.ts', stylesBlank(name))
         },
         {
           title: 'spec.tsx',
