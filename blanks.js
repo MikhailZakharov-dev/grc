@@ -9,8 +9,8 @@ const componentBlank = (name, withStyles) => `import React, { FC } from 'react';
 ${withStyles ? `import { Styled${name} } from './styled';` : ''}
 import { ${propsName(name)} } from './types';
 
-const ${name}: FC<${propsName(name)}> = () => {
-  return ${withStyles ? `<Styled${name}>${name}</Styled${name}>;` : `<div>${name}</div>;`}
+const ${name}: FC<${propsName(name)}> = ({ children, ...props }) => {
+  return ${withStyles ? `<Styled${name} {...props}>${name}</Styled${name}>;` : `<div {...props}>${name}</div>;`}
 };
 
 export default ${name};
@@ -23,8 +23,6 @@ const typesBlank = (name) => `export interface ${propsName(name)} {
 `
 
 const stylesBlank = (name) => `import styled from 'styled-components/macro';
-
-// import { ${propsName(name)} } from './types';
 
 export const Styled${name} = styled.div\`\`;
 `
