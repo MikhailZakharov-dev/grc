@@ -54,9 +54,9 @@ const tasks = new Listr([
           task: () => createFileInDir('styled.ts', stylesBlank(name))
         },
         {
-          title: 'spec.tsx',
+          title: `${name}.spec.tsx`,
           skip: () => !withTests,
-          task: () => createFileInDir('spec.tsx', testBlank(name))
+          task: () => createFileInDir(`${name}.spec.tsx`, testBlank(name))
         },
       ], {concurrent: true})
   }
