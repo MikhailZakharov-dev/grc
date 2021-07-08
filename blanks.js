@@ -28,18 +28,17 @@ export const Styled${name} = styled.div\`\`;
 `
 
 const testBlank = (name) => `import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '/utils/test-utils';
 import ${name} from '.';
 
 describe('<${name}/>', () => {
-  describe('rendering', () => {
-    it('should match snapshot', () => {
-      const component = shallow(<${name} />);
-      expect(component).toMatchSnapshot();
+  describe('рендер', () => {
+    it('должен ...', () => {
+      const component = render(<${name} />);
     });
   });
-  describe('interactions', () => {});
-  describe('lifecycle invocations', () => {});
+  describe('действия', () => {});
+  describe('жизненные циклы', () => {});
 });
 `
 
