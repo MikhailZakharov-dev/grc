@@ -1,6 +1,6 @@
 const propsName = (name) => `I${name}Props`; 
 
-const indexBlank = (name) => `export { default } from './${name}';
+const indexBlank = (name) => `export { ${name} } from './${name}';
 `;
 
 
@@ -9,11 +9,9 @@ const componentBlank = (name, withStyles) => `import React, { FC } from 'react';
 ${withStyles ? `import { Styled${name} } from './styled';` : ''}
 import { ${propsName(name)} } from './types';
 
-const ${name}: FC<${propsName(name)}> = ({ children, ...props }) => {
+export const ${name}: FC<${propsName(name)}> = ({ children, ...props }) => {
   return ${withStyles ? `<Styled${name} {...props}>${name}</Styled${name}>;` : `<div {...props}>${name}</div>;`}
 };
-
-export default ${name};
 `
 
 const typesBlank = (name) => `export interface ${propsName(name)} {
@@ -28,13 +26,13 @@ export const Styled${name} = styled.div\`\`;
 `
 
 const testBlank = (name) => `import React from 'react';
-import { render } from '/utils/test-utils';
-import ${name} from '.';
+import { render } from 'utils/test-utils';
+import { ${name} } from './${name}';
 
 describe('<${name}/>', () => {
   describe('рендер', () => {
     it('должен ...', () => {
-      const component = render(<${name} />);
+      render(<${name} />);
     });
   });
   describe('действия', () => {});
